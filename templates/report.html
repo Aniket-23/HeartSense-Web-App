@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cardiac Risk Report</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa;
+            color: #343a40;
+            margin: 20px;
+        }
+
+        h1, h2 {
+            color: #007bff;
+            text-align: center;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            margin-bottom: 10px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            padding: 12px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease-in-out;
+        }
+
+        li:hover {
+            transform: scale(1.05);
+        }
+
+        button {
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            cursor: pointer;
+            border: none;
+            border-radius: 4px;
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        svg {
+            max-width: 100%;
+            height: auto;
+        }
+        /* Keyframe animations */
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+
+    @keyframes slideInUp {
+        from {
+            transform: translateY(20px);
+            opacity: 0;
+        }
+        to {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    }
+        
+    </style>
+    
+    <script>
+
+        function printPDF() {
+            var element = document.body;
+            window.print();
+        }
+    </script>
+</head>
+<body>
+    <h1>Cardiac Risk Report</h1>
+
+    <!-- Display the entered fields from the prediction -->
+    <ul>
+        <li class="entered-field">
+            <svg class="field-icon" fill="#6c757d" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0 0h24v24H0V0z" fill="none"/>
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-.5-13h1v4h-2v-2h1V9a2 2 0 1 0-4 0v1h-1v-1a3 3 0 1 1 6 0v4h-1v1h3v-2h-1z"/>
+            </svg>
+            <span class="field-label"><strong>Gender:</strong></span> {{ Gender }}
+        </li>
+        <li class="entered-field">
+            <svg class="field-icon" fill="#6c757d" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0 0h24v24H0V0z" fill="none"/>
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-.5-13h1v4h-2v-2h1V9a2 2 0 1 0-4 0v1h-1v-1a3 3 0 1 1 6 0v4h-1v1h3v-2h-1z"/>
+            </svg>
+            <span class="field-label"><strong>Chain Smoker:</strong></span> {{ Chain_smoker }}
+        </li>
+        <li class="entered-field">
+            <svg class="field-icon" fill="#6c757d" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0 0h24v24H0V0z" fill="none"/>
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-.5-13h1v4h-2v-2h1V9a2 2 0 1 0-4 0v1h-1v-1a3 3 0 1 1 6 0v4h-1v1h3v-2h-1z"/>
+            </svg>
+            <span class="field-label"><strong>Consumes Other Tobacco Products:</strong></span> {{ Consumes_other_tobacco_products }}
+        </li>
+        <li class="entered-field">
+            <svg class="field-icon" fill="#6c757d" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0 0h24v24H0V0z" fill="none"/>
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-.5-13h1v4h-2v-2h1V9a2 2 0 1 0-4 0v1h-1v-1a3 3 0 1 1 6 0v4h-1v1h3v-2h-1z"/>
+            </svg>
+            <span class="field-label"><strong>High Blood Pressure:</strong></span> {{ High_bp }}
+        </li>
+        <li class="entered-field">
+            <svg class="field-icon" fill="#6c757d" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0 0h24v24H0V0z" fill="none"/>
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-.5-13h1v4h-2v-2h1V9a2 2 0 1 0-4 0v1h-1v-1a3 3 0 1 1 6 0v4h-1v1h3v-2h-1z"/>
+            </svg>
+            <span class="field-label"><strong>Obese:</strong></span> {{ Obese }}
+        </li>
+        <li class="entered-field">
+            <svg class="field-icon" fill="#6c757d" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0 0h24v24H0V0z" fill="none"/>
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-.5-13h1v4h-2v-2h1V9a2 2 0 1 0-4 0v1h-1v-1a3 3 0 1 1 6 0v4h-1v1h3v-2h-1z"/>
+            </svg>
+            <span class="field-label"><strong>Diabetes:</strong></span> {{ Diabetes }}
+        </li>
+        <li class="entered-field">
+            <svg class="field-icon" fill="#6c757d" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0 0h24v24H0V0z" fill="none"/>
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-.5-13h1v4h-2v-2h1V9a2 2 0 1 0-4 0v1h-1v-1a3 3 0 1 1 6 0v4h-1v1h3v-2h-1z"/>
+            </svg>
+            <span class="field-label"><strong>Metabolic Syndrome:</strong></span> {{ Metabolic_syndrome }}
+        </li>
+        <li class="entered-field">
+            <svg class="field-icon" fill="#6c757d" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0 0h24v24H0V0z" fill="none"/>
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-.5-13h1v4h-2v-2h1V9a2 2 0 1 0-4 0v1h-1v-1a3 3 0 1 1 6 0v4h-1v1h3v-2h-1z"/>
+            </svg>
+            <span class="field-label"><strong>Use of Stimulant Drugs:</strong></span> {{ Use_of_stimulant_drugs }}
+        </li>
+        <li class="entered-field">
+            <svg class="field-icon" fill="#6c757d" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0 0h24v24H0V0z" fill="none"/>
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-.5-13h1v4h-2v-2h1V9a2 2 0 1 0-4 0v1h-1v-1a3 3 0 1 1 6 0v4h-1v1h3v-2h-1z"/>
+            </svg>
+            <span class="field-label"><strong>Family History:</strong></span> {{ Family_history }}
+        </li>
+        <li class="entered-field">
+            <svg class="field-icon" fill="#6c757d" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0 0h24v24H0V0z" fill="none"/>
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-.5-13h1v4h-2v-2h1V9a2 2 0 1 0-4 0v1h-1v-1a3 3 0 1 1 6 0v4h-1v1h3v-2h-1z"/>
+            </svg>
+            <span class="field-label"><strong>History of Preeclampsia:</strong></span> {{ History_of_preeclampsia }}
+        </li>
+        <li class="entered-field">
+            <svg class="field-icon" fill="#6c757d" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0 0h24v24H0V0z" fill="none"/>
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-.5-13h1v4h-2v-2h1V9a2 2 0 1 0-4 0v1h-1v-1a3 3 0 1 1 6 0v4h-1v1h3v-2h-1z"/>
+            </svg>
+            <span class="field-label"><strong>CABG History:</strong></span> {{ Cabg_history }}
+        </li>
+        <li class="entered-field">
+            <svg class="field-icon" fill="#6c757d" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0 0h24v24H0V0z" fill="none"/>
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-.5-13h1v4h-2v-2h1V9a2 2 0 1 0-4 0v1h-1v-1a3 3 0 1 1 6 0v4h-1v1h3v-2h-1z"/>
+            </svg>
+            <span class="field-label"><strong>Respiratory Illness:</strong></span> {{ Respiratory_illness }}
+        </li>
+    </ul>
+
+    <h2 style="color: #007bff; margin-top: 30px; font-size: 24px; text-align: center; animation: fadeIn 1s ease-in-out;">Prediction Result:</h2>
+    <div style="margin-top: 10px; font-weight: bold; text-align: center; animation: slideInUp 1s ease-in-out;">
+        <p style="font-size: 18px;">{{ prediction }}</p>
+    </div>
+
+    <!-- Button to print the report as PDF -->
+    <button onclick="printPDF()" style="width: 100%;">
+        <svg fill="#fff" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0 0h24v24H0V0z" fill="none"/>
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-.5-13h1v4h-2v-2h1V9a2 2 0 1 0-4 0v1h-1v-1a3 3 0 1 1 6 0v4h-1v1h3v-2h-1z"/>
+        </svg>
+        Print PDF
+    </button>
+    <!-- Button to go back to landing_index.html -->
+    <form action="{{ url_for('landing_index') }}" method="get">
+        <button type="submit" style="width: 100%; margin-top: 10px;">
+            Go Back
+        </button>
+    </form>
+</body>
+</html>

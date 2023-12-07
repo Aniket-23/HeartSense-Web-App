@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Model Prediction</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            color: #333;
+            margin: 20px;
+        }
+
+        h1 {
+            color: #007bff;
+        }
+
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #555;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 16px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        /* Styling for the dropdown boxes */
+        select {
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            background: url('data:image/svg+xml;utf8,<svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>') no-repeat right 10px center;
+            background-size: 16px;
+            padding-right: 30px;
+            cursor: pointer;
+        }
+
+        button {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 0; /* Updated padding */
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%; /* Added width property */
+        }
+        
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        #predictionResult {
+            margin-top: 20px;
+            font-weight: bold;
+            color: #007bff;
+        }
+    </style>
+</head>
+<body>
+    <h1>Your Model Prediction</h1>
+    <form id="predictionForm" method="post" action="/predict">
+        <!-- Gender dropdown -->
+        <label for="Gender">Gender:</label>
+        <select id="Gender" name="Gender" required>
+            <option value="" selected disabled></option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+        </select>
+
+        <!-- Chain Smoker dropdown -->
+        <label for="Chain_smoker">Chain Smoker:</label>
+        <select id="Chain_smoker" name="Chain_smoker" required>
+            <option value="" selected disabled></option>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+        </select>
+
+        <!-- Consumes Other Tobacco Products dropdown -->
+        <label for="Consumes_other_tobacco_products">Consumes Other Tobacco Products:</label>
+        <select id="Consumes_other_tobacco_products" name="Consumes_other_tobacco_products" required>
+            <option value="" selected disabled></option>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+        </select>
+
+        <!-- High Blood Pressure dropdown -->
+        <label for="HighBP">High Blood Pressure:</label>
+        <select id="HighBP" name="HighBP" required>
+            <option value="" selected disabled></option>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+        </select>
+
+        <!-- Obese dropdown -->
+        <label for="Obese">Obese:</label>
+        <select id="Obese" name="Obese" required>
+            <option value="" selected disabled></option>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+        </select>
+
+        <!-- Diabetes dropdown -->
+        <label for="Diabetes">Diabetes:</label>
+        <select id="Diabetes" name="Diabetes" required>
+            <option value="" selected disabled></option>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+        </select>
+
+        <!-- Metabolic Syndrome dropdown -->
+        <label for="Metabolic_syndrome">Metabolic Syndrome:</label>
+        <select id="Metabolic_syndrome" name="Metabolic_syndrome" required>
+            <option value="" selected disabled></option>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+        </select>
+
+        <!-- Use of Stimulant Drugs dropdown -->
+        <label for="Use_of_stimulant_drugs">Use of Stimulant Drugs:</label>
+        <select id="Use_of_stimulant_drugs" name="Use_of_stimulant_drugs" required>
+            <option value="" selected disabled></option>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+        </select>
+
+        <!-- Family History dropdown -->
+        <label for="Family_history">Family History:</label>
+        <select id="Family_history" name="Family_history" required>
+            <option value="" selected disabled></option>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+        </select>
+
+        <!-- History of Preeclampsia dropdown -->
+        <label for="History_of_preeclampsia">History of Preeclampsia:</label>
+        <select id="History_of_preeclampsia" name="History_of_preeclampsia" required>
+            <option value="" selected disabled></option>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+        </select>
+
+        <!-- CABG History dropdown -->
+        <label for="CABG_history">CABG History:</label>
+        <select id="CABG_history" name="CABG_history" required>
+            <option value="" selected disabled></option>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+        </select>
+
+        <!-- Respiratory Illness dropdown -->
+        <label for="Respiratory_illness">Respiratory Illness:</label>
+        <select id="Respiratory_illness" name="Respiratory_illness" required>
+            <option value="" selected disabled></option>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+        </select>
+
+        <button type="submit">Predict</button>
+    </form>
+    <div id="predictionResult"></div>
+</body>
+</html>

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Numeric Report</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            color: #333;
+            margin: 20px;
+        }
+
+        h1 {
+            color: #007bff;
+        }
+
+        button {
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            cursor: pointer;
+            border: none;
+            border-radius: 4px;
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .report-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #555;
+        }
+
+        .result {
+            margin-top: 20px;
+            font-weight: bold;
+            color: #007bff;
+        }
+    </style>
+    <script>
+
+        function printPDF() {
+            var element = document.body;
+            window.print();
+        }
+    </script>
+</head>
+<body>
+    <h1>Heart Disease Prediction Report</h1>
+    <div class="report-container">
+        <label for="age">Age:</label>
+        <p id="age">{{ age }}</p>
+
+        <label for="sex">Sex:</label>
+        <p id="sex">{{ sex }}</p>
+
+        <label for="chest_pain">Chest Pain Type:</label>
+        <p id="chest_pain">{{ chest_pain }}</p>
+
+        <label for="resting_bp">Resting Blood Pressure:</label>
+        <p id="resting_bp">{{ resting_bp }}</p>
+
+        <label for="serum_cholesterol">Serum Cholestoral (mg/dl):</label>
+        <p id="serum_cholesterol">{{ serum_cholesterol }}</p>
+
+        <label for="fasting_blood_sugar">Fasting Blood Sugar (>120 mg/dl):</label>
+        <p id="fasting_blood_sugar">{{ fasting_blood_sugar }}</p>
+
+        <label for="resting_ecg">Resting Electrocardiographic Results:</label>
+        <p id="resting_ecg">{{ resting_ecg }}</p>
+
+        <label for="max_heart_rate">Maximum Heart Rate Achieved:</label>
+        <p id="max_heart_rate">{{ max_heart_rate }}</p>
+
+        <label for="exercise_angina">Exercise Induced Angina:</label>
+        <p id="exercise_angina">{{ exercise_angina }}</p>
+
+        <label for="st_depression">ST Depression Induced by Exercise:</label>
+        <p id="st_depression">{{ st_depression }}</p>
+
+        <label for="slope_st_segment">Slope of Peak Exercise ST Segment:</label>
+        <p id="slope_st_segment">{{ slope_st_segment }}</p>
+
+        <label for="num_vessels">Number of Major Vessels (0-3) Colored by Fluoroscopy:</label>
+        <p id="num_vessels">{{ num_vessels }}</p>
+
+        <label for="thal">Thal:</label>
+        <p id="thal">{{ thal }}</p>
+
+        <div class="result">
+            <p>The predicted result is: {{ numeric_result }}</p>
+        </div>
+    </div>
+    <!-- Button to print the report as PDF -->
+    <button onclick="printPDF()" style="width: 100%;">
+        Print PDF
+    </button>
+    <form action="{{ url_for('landing_index') }}" method="get">
+        <button type="submit" style="width: 100%; margin-top: 10px;">
+            Go Back
+        </button>
+    </form>
+</body>
+</html>

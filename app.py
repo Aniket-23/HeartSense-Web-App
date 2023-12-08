@@ -1,12 +1,20 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, flash
 import numpy as np
 from werkzeug.utils import secure_filename
 import os
 import cv2
 from tensorflow.keras.models import load_model
 import pickle
+from pymongo import MongoClient
+from werkzeug.security import generate_password_hash, check_password_hash
 
 app = Flask(__name__)
+app.config['SECRET_KEY'] = 'Daemon@2247211'
+
+# MongoDB connection
+client = MongoClient("mongodb://localhost:27017/")
+db = client["heartsense"]  
+users_collection = db["users"]
 
 # Load your saved model
 model = load_model('./static/CardiacRiskPrediction.h5')
@@ -15,8 +23,40 @@ model = load_model('./static/CardiacRiskPrediction.h5')
 def home():
     return render_template('index.html')
 
-@app.route('/signup')
+@app.route('/signup', methods=['GET', 'POST'])
 def signup():
+    if request.method == 'POST':
+        name = request.form['name']
+        email = request.form['email']
+        password = request.form['password']
+        confirm_password = request.form['confirm_password']
+
+        # Check if the passwords match
+        if password != confirm_password:
+            return render_template('signup.html', error='Passwords do not match')
+
+        # Check if the email is unique
+        existing_user = users_collection.find_one({'email': email})
+        if existing_user:
+            return render_template('signup.html', error='Email already exists')
+
+        # Save the user to the database
+        user_data = {
+            'name': name,
+            'email': email,
+            'password': password,  # Store plain text password
+            # Add other user data fields as needed
+        }
+
+        try:
+            users_collection.insert_one(user_data)
+            print("User successfully registered.")
+        except Exception as e:
+            print(f"Error inserting user into the database: {e}")
+
+        # Redirect to the login page after successful registration
+        return redirect(url_for('landing_index'))
+
     return render_template('signup.html')
 
 @app.route('/survey')

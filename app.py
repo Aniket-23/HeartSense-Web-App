@@ -1,5 +1,8 @@
 from flask import Flask, render_template, request, redirect, url_for
 import numpy as np
+from werkzeug.utils import secure_filename
+import os
+import cv2
 from tensorflow.keras.models import load_model
 import pickle
 
@@ -112,6 +115,65 @@ def numeric_predict():
                            max_heart_rate=max_heart_rate, exercise_angina=exercise_angina,
                            st_depression=st_depression, slope_st_segment=slope_st_segment,
                            num_vessels=num_vessels, thal=thal, numeric_result=numeric_result)
+
+# Path to the uploaded files
+UPLOAD_FOLDER = 'uploads'
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+
+# Ensure the 'uploads' directory exists
+if not os.path.exists(UPLOAD_FOLDER):
+    os.makedirs(UPLOAD_FOLDER)
+
+# Load your pre-trained Keras model
+bestmodel = load_model('./static/best_model.h5')
+
+# Function to preprocess the uploaded image
+def preprocess_image(image_path):
+    image = cv2.imread(image_path)
+    image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+    image = cv2.resize(image, (224, 224))
+    image = image / 255.0  # Normalize
+    image = np.expand_dims(image, axis=0)  # Add batch dimension
+    return image
+
+# Function to get the class labels
+def get_class_labels():
+    return ['N', 'S', 'V', 'F', 'Q']
+
+# Route for the main page
+@app.route('/ecginput')
+def ecginput():
+    return render_template('ecginput.html')
+
+# Route for handling the uploaded file and displaying the result
+@app.route('/upload', methods=['POST'])
+def upload_file():
+    if 'file' not in request.files:
+        return redirect(request.url)
+
+    file = request.files['file']
+
+    if file.filename == '':
+        return redirect(request.url)
+
+    if file:
+        filename = secure_filename(file.filename)
+        file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+        file.save(file_path)
+
+        # Perform classification
+        input_image = preprocess_image(file_path)
+        prediction = bestmodel.predict(input_image)
+        class_labels = get_class_labels()
+        predicted_class = class_labels[np.argmax(prediction)]
+
+        # Redirect to the result page
+        return redirect(url_for('ecg_report', filename=filename, predicted_class=predicted_class))
+
+# Route for the ECG report page
+@app.route('/ecgreport/<filename>/<predicted_class>')
+def ecg_report(filename, predicted_class):
+    return render_template('ecgreport.html', filename=filename, predicted_class=predicted_class)
 
 
 if __name__ == '__main__':
